@@ -9,7 +9,7 @@ function App() {
   const [optionSelected, setOptionSelected] = useState(null);
 
   function handleNextButton() {
-    if (count < isLastQuestion) {
+    if (count < lastQuestionIndex) {
       setHasAnswered(false);
       setCount(count + 1);
       setOptionSelected(null);
@@ -38,7 +38,7 @@ function App() {
     setSubmitted(false);
   }
 
-  const isLastQuestion = questions.length-1 ;
+  const lastQuestionIndex = questions.length - 1;
 
   return (
     <div className="flex flex-col  my-5 mx-10">
@@ -54,27 +54,35 @@ function App() {
                 <input
                   type="button"
                   value={option}
-                  className={` w-100 border-1 px-5 py-2 rounded-xl ${optionSelected === option ? "!bg-green-500" :""}  hover:!bg-amber-300 hover:!text-yellow-800 text-2xl`}
+                  className={` w-100 border-1 px-5 py-2 rounded-xl text-2xl
+                    ${
+                    hasAnswered
+                      ? option === questions[count].correctAnswer
+                        ? "!bg-green-500"
+                        : option === optionSelected
+                        ? "!bg-red-500"
+                        : ""
+                      : "hover:!bg-amber-300 hover:!text-yellow-800 text-2xl"
+                  }`}
                   onClick={() => verifyResult(option)}
                 />
               </div>
             ))}
           </div>
           <div className="flex  gap-2 my-5 justify-center">
-            {count === isLastQuestion ?  (
-               <button className="border-1 px-5 py-2 rounded-xl cursor-not-allowed  w-30">
+            {count === lastQuestionIndex ? (
+              <button className="border-1 px-5 py-2 rounded-xl cursor-not-allowed  w-30">
                 Next
               </button>
-            ):(
+            ) : (
               <button
                 onClick={handleNextButton}
                 className="border-1 px-5 py-2 rounded-xl hover:!bg-green-600  w-30"
               >
                 Next
               </button>
-             
             )}
-            {count === isLastQuestion ? (
+            {count === lastQuestionIndex ? (
               <button
                 onClick={handleSubmit}
                 className="border-1 px-5 py-2 rounded-xl hover:!bg-blue-600   w-30 "
@@ -96,7 +104,7 @@ function App() {
           >
             Retry
           </button>
-          <div class="flex h-100 items-center justify-center">
+          <div className="flex h-100 items-center justify-center">
             <h2 className="text-6xl ">Your Score : {score}</h2>
           </div>
         </>

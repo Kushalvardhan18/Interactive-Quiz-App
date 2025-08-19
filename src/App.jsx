@@ -41,11 +41,11 @@ function App() {
   const lastQuestionIndex = questions.length - 1;
 
   return (
-    <div className="flex flex-col  my-5 mx-10">
-      <h1 className="font-bold text-6xl !text-amber-300 text-center">Quiz</h1>
+    <div className="flex flex-col  my-5 mx-10 flex-wrap ">
+      <h1 className="font-bold text-6xl !text-amber-300 !text-center ">Quiz</h1>
       {!submitted ? (
         <>
-          <div className="my-8 text-3xl">
+          <div className="my-8 text-md sm:text-3xl">
             Question {questions[count].id} : {questions[count].title}
           </div>
           <div className="flex flex-col gap-5 ">
@@ -54,7 +54,7 @@ function App() {
                 <input
                   type="button"
                   value={option}
-                  className={` w-100 border-1 px-5 py-2 rounded-xl text-2xl
+                  className={` w-40 border-1 px-5 py-2 rounded-xl text-xs sm:w-80 sm:text-2xl 
                     ${
                     hasAnswered
                       ? option === questions[count].correctAnswer
@@ -71,13 +71,13 @@ function App() {
           </div>
           <div className="flex  gap-2 my-5 justify-center">
             {count === lastQuestionIndex ? (
-              <button className="border-1 px-5 py-2 rounded-xl cursor-not-allowed  w-30">
+              <button className="border-1 px-5 py-2 rounded-xl cursor-not-allowed text-xs sm:w-30 sm:text-2xl !bg-green-200">
                 Next
               </button>
             ) : (
               <button
                 onClick={handleNextButton}
-                className="border-1 px-5 py-2 rounded-xl hover:!bg-green-600  w-30"
+                className="border-1 px-5 py-2 rounded-xl !bg-green-500 hover:!bg-green-800 w-20 text-xs sm:w-30 sm:text-2xl "
               >
                 Next
               </button>
@@ -85,12 +85,12 @@ function App() {
             {count === lastQuestionIndex ? (
               <button
                 onClick={handleSubmit}
-                className="border-1 px-5 py-2 rounded-xl hover:!bg-blue-600   w-30 "
+                className="border-1 px-5 py-2 rounded-xl !bg-blue-500 hover:!bg-blue-900 w-20 text-xs sm:w-30 sm:text-2xl "
               >
                 Submit
               </button>
             ) : (
-              <button className=" border-1 px-5 py-2 rounded-xl  w-30 cursor-not-allowed">
+              <button className=" border-1 px-5 py-2 rounded-xl  sm:w-30 cursor-not-allowed text-xs sm:text-2xl !bg-blue-200">
                 Submit
               </button>
             )}
@@ -105,7 +105,7 @@ function App() {
             Retry
           </button>
           <div className="flex h-100 items-center justify-center">
-            <h2 className="text-6xl ">Your Score : {score}</h2>
+            <h2 className=" text-2xlsm:text-6xl ">Your Score : {score}</h2>
           </div>
         </>
       )}

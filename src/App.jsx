@@ -105,7 +105,7 @@ function App() {
             Retry
           </button>
           <div className="flex h-100 items-center justify-center">
-            <h2 className=" text-2xlsm:text-6xl ">Your Score : {score}</h2>
+            <h2 className=" text-2xl sm:text-6xl ">Your Score : {score}</h2>
           </div>
         </>
       )}
